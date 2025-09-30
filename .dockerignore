@@ -15,7 +15,9 @@ venv/
 # Logs and transient artifacts
 *.log
 webui786*.log
-cache/
+# Project tree to include
+!stable-diffusion-webui/
+!stable-diffusion-webui/**
 
 # macOS metadata in subdirectories
 */.DS_Store
