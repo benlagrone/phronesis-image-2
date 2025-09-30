@@ -17,6 +17,11 @@ if [[ ! -d "${SRC_DIR}" ]]; then
   exit 1
 fi
 
+if [[ -L "${SRC_DIR}" ]]; then
+  echo "Models directory already symlinked; nothing to move."
+  exit 0
+fi
+
 mkdir -p "${DEST_DIR}"
 
 # Move each item individually so we can cleanly handle collisions.

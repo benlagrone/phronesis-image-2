@@ -5,24 +5,26 @@ set -euo pipefail
 SCRIPT_DIR=$(cd -- "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 REPO_ROOT=$(cd -- "${SCRIPT_DIR}/.." && pwd)
 
-SRC_DIR="${REPO_ROOT}/stable-diffusion-webui/models"
-DEST_DIR="${HOME}/sd-models"
+SRC_DIR="${REPO_ROOT}/stable-diffusion-webui/outputs"
+DEST_PARENT="${HOME}/Pictures"
+DEST_DIR="${DEST_PARENT}/$(basename "${SRC_DIR}")"
 
-echo "Source directory: ${SRC_DIR}"
-echo "Destination directory: ${DEST_DIR}"
+echo "Source outputs directory: ${SRC_DIR}"
+echo "Destination outputs directory: ${DEST_DIR}"
 
 if [[ ! -d "${SRC_DIR}" ]]; then
-  echo "Source models directory not found." >&2
+  echo "Outputs directory not found." >&2
   exit 1
 fi
 
 if [[ -L "${SRC_DIR}" ]]; then
-  echo "Models directory already symlinked; nothing to move."
+  echo "Outputs directory already symlinked; nothing to move."
   exit 0
 fi
 
 mkdir -p "${DEST_DIR}"
 
+# Move each item inside outputs individually.
 shopt -s nullglob dotglob
 items=("${SRC_DIR}"/*)
 if (( ${#items[@]} == 0 )); then
@@ -41,13 +43,8 @@ else
 fi
 shopt -u nullglob dotglob
 
-if [[ -d "${SRC_DIR}" && ! -L "${SRC_DIR}" ]]; then
-  if rmdir "${SRC_DIR}" 2>/dev/null; then
-    ln -s "${DEST_DIR}" "${SRC_DIR}"
-    echo "Created symlink ${SRC_DIR} -> ${DEST_DIR}"
-  else
-    echo "Could not remove ${SRC_DIR}; leaving contents as-is." >&2
-  fi
-fi
-
-echo "Model artifacts are now stored in ${DEST_DIR}."
+# Replace project outputs dir with a symlink pointing to the new location.
+rm -rf "${SRC_DIR}"
+ln -s "${DEST_DIR}" "${SRC_DIR}"
+echo "Created symlink ${SRC_DIR} -> ${DEST_DIR}"
+echo "Outputs are now stored in ${DEST_DIR}."

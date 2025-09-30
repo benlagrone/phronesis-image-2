@@ -1,0 +1,38 @@
+# macOS metadata
+.DS_Store
+
+# Local logs
+*.log
+
+# Python cache
+__pycache__/
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+
+# Node dependencies
+node_modules/
+
+# Stable Diffusion WebUI artifacts
+stable-diffusion-webui/cache/
+stable-diffusion-webui/cache.json*
+stable-diffusion-webui/config.json
+stable-diffusion-webui/config_states/
+stable-diffusion-webui/embeddings/
+stable-diffusion-webui/extensions/
+stable-diffusion-webui/extensions-builtin/
+stable-diffusion-webui/models/
+stable-diffusion-webui/outputs/
+stable-diffusion-webui/repositories/
+stable-diffusion-webui/tmp/
+stable-diffusion-webui/ui-config.json
+stable-diffusion-webui/venv/
+stable-diffusion-webui/webui*.log
+stable-diffusion-webui/sysinfo-*.json
+stable-diffusion-webui/*.ckpt
+stable-diffusion-webui/*.safetensors
+stable-diffusion-webui/params.txt
+stable-diffusion-webui/styles.csv*
