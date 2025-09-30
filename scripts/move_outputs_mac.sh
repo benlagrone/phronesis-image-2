@@ -43,8 +43,13 @@ else
 fi
 shopt -u nullglob dotglob
 
-# Replace project outputs dir with a symlink pointing to the new location.
 rm -rf "${SRC_DIR}"
-ln -s "${DEST_DIR}" "${SRC_DIR}"
-echo "Created symlink ${SRC_DIR} -> ${DEST_DIR}"
+
+if [[ "${NO_SYMLINK:-0}" == "1" ]]; then
+  echo "Outputs moved to ${DEST_DIR}. No symlink created (requested via NO_SYMLINK)."
+else
+  ln -s "${DEST_DIR}" "${SRC_DIR}"
+  echo "Created symlink ${SRC_DIR} -> ${DEST_DIR}"
+fi
+
 echo "Outputs are now stored in ${DEST_DIR}."
