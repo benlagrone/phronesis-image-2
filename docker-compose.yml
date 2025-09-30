@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  webui:
+    build: .
+    container_name: phronesis-webui
+    restart: unless-stopped
+    environment:
+      - COMMANDLINE_ARGS=--listen --port 7861 --skip-torch-cuda-test --outdir /data/pictures/outputs --ckpt-dir /data/models --api
+      - TORCH_COMMAND=${TORCH_COMMAND:-pip install torch==2.1.2 torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cpu}
+    volumes:
+      - ${SD_MODELS_DIR}:/data/models
+      - ${SD_OUTPUTS_DIR}:/data/pictures
+    ports:
+      - "7861:7861"
+    networks:
+      - fortress-phronesis-net
+
+networks:
+  fortress-phronesis-net:
+    external: true
+    name: fortress-phronesis-net

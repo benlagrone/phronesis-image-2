@@ -84,6 +84,38 @@ Use your usual launch command to start the application, pointing `--ckpt` at you
 python launch.py --ckpt ~/sd-models/Reliberate_v3.safetensors --port 7861 --skip-torch-cuda-test --upcast-sampling --no-half-vae --use-cpu interrogate --api --no-half --precision full --use-cpu all --disable-nan-check --medvram --device mps --reinstall-torch
 ```
 
+## Step 5: Run Inside Docker (Optional)
+
+1. Copy the sample environment file and configure host paths for your shared directories:
+
+   ```bash
+   cp .env.example .env
+   # edit .env so SD_MODELS_DIR and SD_OUTPUTS_DIR point at your host folders
+   ```
+
+2. Build and start the container on the shared `fortress-phronesis-net` bridge:
+
+   ```bash
+   docker compose up --build -d
+   ```
+
+   The compose file mounts your model and picture folders into the container at `/data/models` and `/data/pictures`, publishes the UI on port 7861, and attaches to `fortress-phronesis-net` for intra-service communication.
+
+3. Watch the logs or follow the startup interactively if needed:
+
+   ```bash
+   docker compose logs -f
+   ```
+
+4. Stop or restart the service when required:
+
+   ```bash
+   docker compose down      # stop and remove the container
+   docker compose restart   # restart after configuration edits
+   ```
+
+The container keeps writing generated images to `SD_OUTPUTS_DIR/outputs` on the host and loads checkpoints from `SD_MODELS_DIR`.
+
 ---
 
 ## Why This Works:
