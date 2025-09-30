@@ -91,6 +91,7 @@ python launch.py --ckpt ~/sd-models/Reliberate_v3.safetensors --port 7861 --skip
    ```bash
    cp .env.example .env
    # edit .env so SD_MODELS_DIR and SD_OUTPUTS_DIR point at your host folders
+   # (e.g., leave the default ${HOME}/... values or replace with any absolute path)
    ```
 
 2. Build and start the container on the shared `fortress-phronesis-net` bridge:
