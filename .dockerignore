@@ -1,14 +1,21 @@
-# Exclude everything by default
-*
+# Ignore VCS and editor metadata
+.git
+.gitignore
+.DS_Store
 
-# Allow required build files and project sources
-!Dockerfile
-!docker-compose.yml
-!docker-entrypoint.sh
-!.env.example
-!startup.md
-!scripts/
-!scripts/**
-!stable-diffusion-webui/
-!stable-diffusion-webui/**
-!webui7861.log
+# Python caches
+__pycache__/
+*.pyc
+
+# Local environments
+venv/
+.env
+.env.local
+
+# Logs and transient artifacts
+*.log
+webui786*.log
+cache/
+
+# macOS metadata in subdirectories
+*/.DS_Store
