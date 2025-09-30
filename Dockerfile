@@ -13,10 +13,10 @@ RUN apt-get update \
 WORKDIR /app
 
 # Copy project sources.
-COPY . /app
-
-RUN ls -al /app \
- && ls -al /app/stable-diffusion-webui
+COPY docker-entrypoint.sh /app/docker-entrypoint.sh
+COPY requirements.txt /app/requirements.txt
+COPY requirements_versions.txt /app/requirements_versions.txt
+COPY scripts /app/scripts
 
 RUN pip install --upgrade pip \
  && pip install --no-cache-dir -r /app/requirements_versions.txt \
@@ -27,7 +27,6 @@ RUN useradd --create-home --shell /bin/bash webui \
  && chown -R webui:webui /app
 
 USER webui
-WORKDIR /app/stable-diffusion-webui
 
 ENV PATH="/home/webui/.local/bin:${PATH}"
 
