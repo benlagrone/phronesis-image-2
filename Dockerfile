@@ -15,11 +15,11 @@ WORKDIR /app
 # Copy project sources.
 COPY . /app
 
-WORKDIR /app/stable-diffusion-webui
-
 RUN pip install --upgrade pip \
- && pip install --no-cache-dir -r requirements_versions.txt \
- && pip install --no-cache-dir -r requirements.txt
+ && pip install --no-cache-dir -r /app/stable-diffusion-webui/requirements_versions.txt \
+ && pip install --no-cache-dir -r /app/stable-diffusion-webui/requirements.txt
+
+WORKDIR /app/stable-diffusion-webui
 
 # Use a non-root user for running the web UI.
 RUN useradd --create-home --shell /bin/bash webui \
