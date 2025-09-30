@@ -12,17 +12,12 @@ RUN apt-get update \
 
 WORKDIR /app
 
-# Pre-copy requirement files for better build caching.
-COPY stable-diffusion-webui/requirements_versions.txt stable-diffusion-webui/requirements_versions.txt
-COPY stable-diffusion-webui/requirements.txt stable-diffusion-webui/requirements.txt
-
-RUN pip install --upgrade pip \
- && pip install --no-cache-dir -r stable-diffusion-webui/requirements_versions.txt
-
 # Copy project sources.
 COPY . /app
 
-RUN pip install --no-cache-dir -r /app/stable-diffusion-webui/requirements.txt
+RUN pip install --upgrade pip \
+ && pip install --no-cache-dir -r stable-diffusion-webui/requirements_versions.txt \
+ && pip install --no-cache-dir -r stable-diffusion-webui/requirements.txt
 
 # Use a non-root user for running the web UI.
 RUN useradd --create-home --shell /bin/bash webui \
