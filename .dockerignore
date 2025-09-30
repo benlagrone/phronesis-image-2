@@ -7,6 +7,8 @@
 !docker-entrypoint.sh
 !.env.example
 !startup.md
+!scripts
 !scripts/**
+!stable-diffusion-webui
 !stable-diffusion-webui/**
 !webui7861.log
