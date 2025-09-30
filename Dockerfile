@@ -21,6 +21,8 @@ RUN pip install --upgrade pip \
 
 WORKDIR /app/stable-diffusion-webui
 
+RUN ls -al /app
+
 # Use a non-root user for running the web UI.
 RUN useradd --create-home --shell /bin/bash webui \
  && chown -R webui:webui /app

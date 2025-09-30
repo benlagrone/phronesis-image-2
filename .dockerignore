@@ -1,0 +1,12 @@
+# Exclude everything by default
+*
+
+# Allow required build files and project sources
+!Dockerfile
+!docker-compose.yml
+!docker-entrypoint.sh
+!.env.example
+!startup.md
+!scripts/**
+!stable-diffusion-webui/**
+!webui7861.log
