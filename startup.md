@@ -120,7 +120,7 @@ The compose stack mounts:
 - `SD_MODELS_DIR` -> `/data/models`
 - `SD_OUTPUTS_DIR` -> `/data/pictures`
 
-The entrypoint rewires `/app/stable-diffusion-webui/outputs` to the mounted `/data/pictures/outputs`, so images land in `SD_OUTPUTS_DIR/outputs` on the host while checkpoints continue to load from `SD_MODELS_DIR`.
+The entrypoint rewires `/app/stable-diffusion-webui/outputs` to `/data/pictures`, so generated images appear directly in `SD_OUTPUTS_DIR` on the host while checkpoints continue to load from `SD_MODELS_DIR`.
 
 ---
 
