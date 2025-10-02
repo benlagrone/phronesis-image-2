@@ -22,6 +22,7 @@ COPY stable-diffusion-webui /app/stable-diffusion-webui
 RUN pip install --upgrade pip \
  && pip install --no-cache-dir -r /app/requirements_versions.txt \
  && pip install --no-cache-dir -r /app/requirements.txt \
+ && pip install --no-cache-dir https://github.com/openai/CLIP/archive/d50d76daa670286dd6cacf3bcd80b5e4823fc8e1.zip \
  && if [ ! -f /app/stable-diffusion-webui/launch.py ]; then \
       git clone --depth 1 https://github.com/AUTOMATIC1111/stable-diffusion-webui.git /app/stable-diffusion-webui; \
     fi
