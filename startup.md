@@ -120,7 +120,7 @@ The compose stack mounts:
 - `SD_MODELS_DIR` -> `/data/models`
 - `SD_OUTPUTS_DIR` -> `/data/pictures`
 
-This keeps generated images under `SD_OUTPUTS_DIR/outputs` and reuses your checkpoint directory while the image bundles the WebUI source code.
+The entrypoint rewires `/app/stable-diffusion-webui/outputs` to the mounted `/data/pictures/outputs`, so images land in `SD_OUTPUTS_DIR/outputs` on the host while checkpoints continue to load from `SD_MODELS_DIR`.
 
 ---
 
