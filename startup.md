@@ -95,9 +95,7 @@ python launch.py --ckpt ~/sd-models/Reliberate_v3.safetensors --port 7861 --skip
    # use `echo $HOME` on Ubuntu if you need to confirm your home directory path
    ```
 
-2. Ensure the `stable-diffusion-webui` source tree is present in this project folder (it is bind-mounted into the container).
-
-3. Build and start the container on the shared `fortress-phronesis-net` bridge:
+2. Build and start the container on the shared `fortress-phronesis-net` bridge:
 
    ```bash
    docker compose up --build -d
@@ -105,13 +103,13 @@ python launch.py --ckpt ~/sd-models/Reliberate_v3.safetensors --port 7861 --skip
 
    The compose file mounts your model and picture folders into the container at `/data/models` and `/data/pictures`, publishes the UI on port 7861, and attaches to `fortress-phronesis-net` for intra-service communication.
 
-4. Watch the logs or follow the startup interactively if needed:
+3. Watch the logs or follow the startup interactively if needed:
 
    ```bash
    docker compose logs -f
    ```
 
-5. Stop or restart the service when required:
+4. Stop or restart the service when required:
 
    ```bash
    docker compose down      # stop and remove the container
@@ -119,11 +117,10 @@ python launch.py --ckpt ~/sd-models/Reliberate_v3.safetensors --port 7861 --skip
    ```
 
 The compose stack mounts:
-- `./stable-diffusion-webui` -> `/app/stable-diffusion-webui`
 - `SD_MODELS_DIR` -> `/data/models`
 - `SD_OUTPUTS_DIR` -> `/data/pictures`
 
-This keeps generated images under `SD_OUTPUTS_DIR/outputs`, reuses your checkpoint directory, and lets you iterate on the WebUI sources locally while the container runs them.
+This keeps generated images under `SD_OUTPUTS_DIR/outputs` and reuses your checkpoint directory while the image bundles the WebUI source code.
 
 ---
 

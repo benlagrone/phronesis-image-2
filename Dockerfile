@@ -17,6 +17,7 @@ COPY docker-entrypoint.sh /app/docker-entrypoint.sh
 COPY requirements.txt /app/requirements.txt
 COPY requirements_versions.txt /app/requirements_versions.txt
 COPY scripts /app/scripts
+COPY stable-diffusion-webui /app/stable-diffusion-webui
 
 RUN pip install --upgrade pip \
  && pip install --no-cache-dir -r /app/requirements_versions.txt \
@@ -27,6 +28,7 @@ RUN useradd --create-home --shell /bin/bash webui \
  && chown -R webui:webui /app
 
 USER webui
+WORKDIR /app/stable-diffusion-webui
 
 ENV PATH="/home/webui/.local/bin:${PATH}"
 
