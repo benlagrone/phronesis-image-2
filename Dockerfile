@@ -21,7 +21,10 @@ COPY stable-diffusion-webui /app/stable-diffusion-webui
 
 RUN pip install --upgrade pip \
  && pip install --no-cache-dir -r /app/requirements_versions.txt \
- && pip install --no-cache-dir -r /app/requirements.txt
+ && pip install --no-cache-dir -r /app/requirements.txt \
+ && if [ ! -f /app/stable-diffusion-webui/launch.py ]; then \
+      git clone --depth 1 https://github.com/AUTOMATIC1111/stable-diffusion-webui.git /app/stable-diffusion-webui; \
+    fi
 
 # Use a non-root user for running the web UI.
 RUN useradd --create-home --shell /bin/bash webui \
