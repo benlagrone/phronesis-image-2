@@ -22,15 +22,6 @@ if [[ -d "${SOURCE_MODELS_DIR}" ]]; then
 fi
 
 # Ensure the WebUI writes outputs to the mounted host directory
-LEGACY_SUBDIR="/data/pictures/outputs"
-if [[ -d "${LEGACY_SUBDIR}" ]]; then
-  echo "Flattening legacy outputs directory at ${LEGACY_SUBDIR}"
-  shopt -s dotglob
-  mv "${LEGACY_SUBDIR}"/* /data/pictures/ 2>/dev/null || true
-  shopt -u dotglob
-  rmdir "${LEGACY_SUBDIR}" 2>/dev/null || true
-fi
-
 if [[ -d /app/stable-diffusion-webui/outputs && ! -L /app/stable-diffusion-webui/outputs ]]; then
   rm -rf /app/stable-diffusion-webui/outputs
 fi
