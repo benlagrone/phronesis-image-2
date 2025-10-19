@@ -11,10 +11,7 @@ services:
     volumes:
       - ${SD_MODELS_DIR}:/data/models
       - ${SD_OUTPUTS_DIR}:/data/pictures
-    device_requests:
-      - driver: nvidia
-        count: all
-        capabilities: [gpu]
+    runtime: ${DOCKER_RUNTIME:-nvidia}
     ports:
       - "7861:7861"
     networks:

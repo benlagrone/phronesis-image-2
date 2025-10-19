@@ -95,7 +95,7 @@ python launch.py --ckpt ~/sd-models/Reliberate_v3.safetensors --port 7861 --skip
    # use `echo $HOME` on Ubuntu if you need to confirm your home directory path
    ```
 
-2. Build and start the container on the shared `fortress-phronesis-net` bridge (ensure the host has the NVIDIA Container Toolkit installed so the `device_requests` GPU binding works):
+2. Build and start the container on the shared `fortress-phronesis-net` bridge (ensure the host has the NVIDIA Container Toolkit installed so the `runtime: nvidia` binding works):
 
    ```bash
    docker compose up --build -d
