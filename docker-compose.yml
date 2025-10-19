@@ -4,11 +4,17 @@ services:
     container_name: phronesis-webui
     restart: unless-stopped
     environment:
-      - COMMANDLINE_ARGS=--listen --port 7861 --skip-torch-cuda-test --ckpt-dir /data/models --api --use-cpu all --precision full --no-half --no-half-vae
-      - TORCH_COMMAND=${TORCH_COMMAND:-pip install torch==2.1.2 torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cpu}
+      - COMMANDLINE_ARGS=${COMMANDLINE_ARGS:---listen --port 7861 --ckpt-dir /data/models --api}
+      - TORCH_COMMAND=${TORCH_COMMAND:-pip install torch==2.1.2 torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cu121}
+      - NVIDIA_VISIBLE_DEVICES=${NVIDIA_VISIBLE_DEVICES:-all}
+      - NVIDIA_DRIVER_CAPABILITIES=${NVIDIA_DRIVER_CAPABILITIES:-compute,utility}
     volumes:
       - ${SD_MODELS_DIR}:/data/models
       - ${SD_OUTPUTS_DIR}:/data/pictures
+    device_requests:
+      - driver: nvidia
+        count: all
+        capabilities: [gpu]
     ports:
       - "7861:7861"
     networks:

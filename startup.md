@@ -95,13 +95,13 @@ python launch.py --ckpt ~/sd-models/Reliberate_v3.safetensors --port 7861 --skip
    # use `echo $HOME` on Ubuntu if you need to confirm your home directory path
    ```
 
-2. Build and start the container on the shared `fortress-phronesis-net` bridge:
+2. Build and start the container on the shared `fortress-phronesis-net` bridge (ensure the host has the NVIDIA Container Toolkit installed so the `device_requests` GPU binding works):
 
    ```bash
    docker compose up --build -d
    ```
 
-   The compose file mounts your model and picture folders into the container at `/data/models` and `/data/pictures`, publishes the UI on port 7861, and attaches to `fortress-phronesis-net` for intra-service communication.
+   The compose file mounts your model and picture folders into the container at `/data/models` and `/data/pictures`, requests all available NVIDIA GPUs, publishes the UI on port 7861, and attaches to `fortress-phronesis-net` for intra-service communication.
 
 3. Watch the logs or follow the startup interactively if needed:
 
@@ -120,7 +120,7 @@ The compose stack mounts:
 - `SD_MODELS_DIR` -> `/data/models`
 - `SD_OUTPUTS_DIR` -> `/data/pictures`
 
-The entrypoint rewires `/app/stable-diffusion-webui/outputs` to `/data/pictures`, so generated images appear directly in `SD_OUTPUTS_DIR` on the host while checkpoints continue to load from `SD_MODELS_DIR`.
+The entrypoint rewires `/app/stable-diffusion-webui/outputs` to `/data/pictures`, so generated images appear directly in `SD_OUTPUTS_DIR` on the host while checkpoints continue to load from `SD_MODELS_DIR`. CUDA wheels for PyTorch are installed by default; override `TORCH_COMMAND` in `.env` only if you need a different version.
 
 ---
 

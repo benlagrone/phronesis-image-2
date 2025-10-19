@@ -3,8 +3,8 @@ FROM python:3.10-slim
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    TORCH_COMMAND="pip install torch==2.1.2 torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cpu" \
-    COMMANDLINE_ARGS="--listen --port 7861 --skip-torch-cuda-test --outdir /data/pictures/outputs --ckpt-dir /data/models --api"
+    TORCH_COMMAND="pip install torch==2.1.2 torchvision==0.16.2 --index-url https://download.pytorch.org/whl/cu121" \
+    COMMANDLINE_ARGS="--listen --port 7861 --ckpt-dir /data/models --api"
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends git ffmpeg libgl1 libglib2.0-0 \
